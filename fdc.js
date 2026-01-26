@@ -174,9 +174,6 @@ async function createUser(referralCode) {
   }
 }
 
-console.log("-=[ PENTIL.PINK ] =-");
-console.log("Group: https://t.me/pentilreborn");
-console.log("Channel: https://t.me/pentilpinkv2");
 rl.question("Please enter the referral code: ", referralCode => {
   createUser(referralCode).then(() => {
     rl.close();
