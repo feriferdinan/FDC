@@ -51,23 +51,23 @@ function generateRandomIndonesianData() {
   const firstName = indonesianFirstNames[Math.floor(Math.random() * indonesianFirstNames.length)];
   const lastName = indonesianLastNames[Math.floor(Math.random() * indonesianLastNames.length)];
   const fullName = `${firstName} ${lastName}`;
-  
+
   // Generate random phone number (Indonesian format: 08xx-xxxx-xxxx)
   const phonePrefix = ["812", "813", "821", "822", "823", "831", "832", "833", "838", "852", "853", "855", "856", "857", "858", "859", "877", "878", "881", "882", "883", "884", "885", "886", "887", "888", "889", "895", "896", "897", "898", "899"];
   const selectedPrefix = phonePrefix[Math.floor(Math.random() * phonePrefix.length)];
   const phoneSuffix = Math.floor(Math.random() * 10000000).toString().padStart(8, '0');
   const phoneNumber = `08${selectedPrefix}${phoneSuffix}`;
-  
+
   // Generate random birth date (age between 18-65 years old)
   const currentYear = new Date().getFullYear();
   const birthYear = currentYear - (Math.floor(Math.random() * 47) + 18); // 18-65 years old
   const birthMonth = Math.floor(Math.random() * 12) + 1;
   const birthDay = Math.floor(Math.random() * 28) + 1; // Use 28 to avoid month-end issues
   const birthDate = `${birthYear}-${birthMonth.toString().padStart(2, '0')}-${birthDay.toString().padStart(2, '0')}`;
-  
+
   // Generate random gender (1 for male, 2 for female)
   const gender = Math.random() > 0.5 ? "1" : "2";
-  
+
   // Generate random address
   const cityData = indonesianCities[Math.floor(Math.random() * indonesianCities.length)];
   const district = cityData.districts[Math.floor(Math.random() * cityData.districts.length)];
@@ -75,14 +75,14 @@ function generateRandomIndonesianData() {
   const street = streetNames[Math.floor(Math.random() * streetNames.length)];
   const streetNumber = Math.floor(Math.random() * 200) + 1;
   const fullStreet = `${street} No. ${streetNumber}`;
-  
+
   // Generate email
   const emailSuffix = Math.floor(Math.random() * 9000) + 1000;
   const email = `${firstName.toLowerCase()}${lastName.toLowerCase()}${emailSuffix}@mailnesia.com`;
-  
+
   // Generate username
   const username = `${firstName.toLowerCase()}${lastName.toLowerCase()}${emailSuffix}@mailnesia.com`;
-  
+
   return {
     name: fullName,
     firstName: firstName,
@@ -99,8 +99,8 @@ function generateRandomIndonesianData() {
   };
 }
 
-async function createUser(referralCode) {
-  for (let i = 0; i < 5; i++) {
+async function createUser(referralCode, numb = 15) {
+  for (let i = 0; i < numb; i++) {
     try {
       // Generate random Indonesian data
       const randomData = generateRandomIndonesianData();
@@ -174,10 +174,8 @@ async function createUser(referralCode) {
   }
 }
 
-console.log("-=[ PENTIL.PINK ] =-");
-console.log("Group: https://t.me/pentilreborn");
-console.log("Channel: https://t.me/pentilpinkv2");
-rl.question("Please enter the referral code: ", referralCode => {
+
+rl.question("Please enter the referral code: ", async referralCode => {
   createUser(referralCode).then(() => {
     rl.close();
   });
